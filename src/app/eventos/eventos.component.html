@@ -1,0 +1,53 @@
+<div>
+  <h2>Eventos Disponíveis</h2>
+
+  <!-- Tabela de Eventos -->
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Nome do Evento</th>
+        <th>Quantidade de Reservas</th>
+        <th>Reservar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let evento of eventos">
+        <td>{{ evento.nome }}</td>
+        <td>
+          <input type="number" [(ngModel)]="evento.num_reservas" min="1" />
+        </td>
+        <td>
+          <button (click)="reservar(evento, evento.num_reservas)">Reservar</button>
+          <button (click)="editarReserva(evento, evento.num_reservas)">Editar Reserva</button>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Minhas Reservas</h3>
+
+  <!-- Tabela de Reservas -->
+  <table border="1" *ngIf="reservasUsuario && reservasUsuario.length > 0">
+    <thead>
+      <tr>
+        <th>Nome do Evento</th>
+        <th>Total de Reservas</th>
+        <th>Ação</th> <!-- Coluna para o botão -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reserva of reservasUsuario">
+        <td>{{ reserva.nome }}</td>
+        <td>{{ reserva.total_reservas }}</td>
+        <td>
+          <!-- Botão Receber Códigos para cada reserva -->
+          <button (click)="receberCodigos(reserva)" class="btn btn-primary">
+            Receber Códigos
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>Verificação de E-mail</h2>
+  <form [formGroup]="verifyForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input id="email" formControlName="email" type="email" class="form-control" placeholder="Digite seu e-mail" />
+      <div *ngIf="isSubmitted && verifyForm.controls['email'].errors" class="invalid-feedback">
+        <div *ngIf="verifyForm.controls['email'].errors?.['required']">O e-mail é obrigatório.</div>
+        <div *ngIf="verifyForm.controls['email'].errors?.['email']">Por favor, insira um e-mail válido.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="codigo">Código de Verificação</label>
+      <input id="codigo" formControlName="codigo" type="text" class="form-control" placeholder="Digite o código" />
+      <div *ngIf="isSubmitted && verifyForm.controls['codigo'].errors" class="invalid-feedback">
+        <div *ngIf="verifyForm.controls['codigo'].errors?.['required']">O código é obrigatório.</div>
+        <div *ngIf="verifyForm.controls['codigo'].errors?.['minlength']">O código deve ter 6 caracteres.</div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="verifyForm.invalid">Validar Código</button>
+
+    <div *ngIf="successMessage" class="alert alert-success mt-3">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+      {{ errorMessage }}
+    </div>
+  </form>
+</div>
